@@ -3,9 +3,38 @@
 Written 2026-11-10. Relief owns the look of the terrain under other people's data, so that look is rendered once here
 and drawn as it is everywhere else. Nobody specifies it per map.
 
-## The rule
+## Styles by height, and Terracotta as the default (2026-11-28)
 
-A base map is Relief's Detuned style, in this order from the bottom:
+By the owner's decision of 28 November 2026 the base of the light theme is **Terracotta**: stepped classes of height that
+change hue (olive lowland, cream, salmon, terracotta, snow above 2,400 m) and stepped classes of water depth from paper
+white on the shelf to petrol in deep water, after Nadieh Bremer's world map. Lowland in an arid climate takes a sand tint
+in place of the olive (the arid weight of the climate zones); nothing else is blended by climate. Detuned, described below,
+stays as the base of the dark theme and as a named file.
+
+`scripts/base_tint.py` holds the styles (`STYLES`, mirrored in `preview/palette.js`): `terracotta`, `seabed` (Sea floor
+first: land one tone, all colour at sea, most of it above 200 m of water), `night` (Night chart: dark water, charcoal land,
+a coloured shade), `shell` (Shell and slate: pink to plum sea, sage to slate land) and `air` (Mountain air: hazy lowland,
+cream heights, a violet and yellow shade). For each region it writes:
+
+- `regional_base_light.png` and `.webp`: the flat Terracotta tint (`base.regional.light`). `base.depth_scale` and
+  `base.land_scale` now describe classes and carry the colours (`stops`: `[metres, colour]`, `stepped: true`), so a
+  consumer draws its keys from the manifest and copies no list.
+- `regional_base_detuned.png` and `.webp`: the light base as it was (`base.detuned`).
+- `regional_base_dark.png`: Detuned, as before.
+- `ground/<style>.webp` (`base.ground`): the **finished ground** of every style, the tint with the sky shade laid on at
+  the strength the style names for land and sea (in soft light, or towards two tones for a coloured shade). It is drawn at
+  the cell of the demo elevation, twice as fine where that is coarser than about 800 m so that coasts and class edges
+  are curves. A map that draws the terrain under its data and no hillshade over it (a printed sheet)
+  takes this file; `base.ground.styles.<style>` gives the name, whether it is stepped, the stops within
+  the frame's range and the shade.
+
+A consumer that copied the Detuned stops for its keys shows the wrong key over the new light base until it reads the
+stops from the manifest. The examples on Relief's own pages (gallery, zoom viewer, techniques) and the fine base
+(`scripts/fine_base.py`) still draw Detuned.
+
+## The rule for Detuned
+
+A Detuned base map is, in this order from the bottom:
 
 1. **Sea floor: a linear gradient** on the region's depth scale. Shelf regions (North Sea, NE Europe, Barents Sea,
    Vestland) run 0 to 1,300 m; ocean regions (Norwegian Sea, Atlantic, world) run 0 to 7,000 m. Both ramps are in

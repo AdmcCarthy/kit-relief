@@ -38,6 +38,17 @@ export const DETUNED_OCEAN = {
   light: ["#e2f4f9", "#bfe2ed", "#83bddc", "#5c9acd", "#4579ba", "#355a9f", "#2a3e80", "#1e2763", "#131546"],
   dark: ["#71b7c8", "#56a5bd", "#2c83aa", "#1d679c", "#154b8a", "#113375", "#101e5c", "#0a0b42", "#040027"],
 };
+// Styles by height (2026-11-28): Terracotta is the default base of the light theme, the others are asked for by name. Stops are [metres, colour]; a stepped
+// style gives a class the colour of its lower stop, a linear one runs between the stops in OKLab. Mirrors STYLES in scripts/base_tint.py (tests keep them
+// in step), which renders them; the examples on these pages still draw Detuned.
+export const DEFAULT_STYLE = "terracotta";
+export const STYLES = {
+  "terracotta": {"name": "Terracotta", "stepped": true, "land": [[0, "#b3bd74"], [60, "#cfd596"], [150, "#e6e2b8"], [300, "#f2dfc0"], [500, "#eec7a2"], [800, "#e0a380"], [1100, "#cd7f5e"], [1400, "#b55f43"], [1700, "#964734"], [2000, "#803b2d"], [2400, "#f7f3ee"]], "arid": [[0, "#f1d8b4"], [60, "#f3dcbc"], [150, "#f4dfc4"], [300, "#f2dfc0"], [500, "#eec7a2"], [800, "#e0a380"], [1100, "#cd7f5e"], [1400, "#b55f43"], [1700, "#964734"], [2000, "#803b2d"], [2400, "#f7f3ee"]], "sea": [[0, "#fcfbf7"], [40, "#f1f5f2"], [80, "#e2eeec"], [120, "#d0e4e5"], [200, "#b5d3da"], [350, "#8fbac8"], [600, "#6a9db3"], [1000, "#4a7f9b"], [1600, "#335f7e"], [2300, "#22445f"], [3200, "#18344c"], [4500, "#10263a"]], "shade": {"land": 1.25, "sea": 1.25}},
+  "seabed": {"name": "Sea floor first", "stepped": false, "land": [[0, "#ebe8e2"]], "sea": [[0, "#f7faf8"], [30, "#e6f1ef"], [60, "#d3e7e6"], [90, "#bfdcdd"], [130, "#a6cdd2"], [200, "#88b9c4"], [350, "#6a9fb2"], [700, "#4a7d98"], [1500, "#2f587a"], [2700, "#1c3a5a"], [4500, "#112842"]], "shade": {"land": 0.6, "sea": 1.6}},
+  "night": {"name": "Night chart", "stepped": false, "land": [[0, "#3b3a37"], [300, "#4a4743"], [800, "#665f55"], [1400, "#8d8271"], [2000, "#c2b7a3"]], "sea": [[0, "#3c5f70"], [50, "#2f4f61"], [120, "#254253"], [250, "#1b3445"], [600, "#132737"], [1500, "#0c1b29"], [2700, "#07121d"], [5000, "#040b13"]], "shade": {"land": 1.5, "sea": 1.5, "tint": ["#05090d", "#e8d9b8", 0.55]}},
+  "shell": {"name": "Shell and slate", "stepped": false, "land": [[0, "#dfe6e2"], [100, "#cdd8d3"], [300, "#b4c4c1"], [600, "#98abb0"], [1000, "#7d8f9e"], [1500, "#66758c"], [1900, "#f4f5f7"]], "sea": [[0, "#fdf8f3"], [50, "#f7ebe4"], [100, "#f0dcd5"], [160, "#e6c9c4"], [300, "#d3aab0"], [700, "#b3889b"], [1500, "#8a6685"], [2700, "#5f4a6e"], [4500, "#44365a"]], "shade": {"land": 1.2, "sea": 1.2}},
+  "air": {"name": "Mountain air", "stepped": false, "land": [[0, "#b7c8c6"], [100, "#c3d0c4"], [300, "#d3d8bf"], [600, "#e6debb"], [1000, "#f4e4bd"], [1500, "#f7dcc6"], [2000, "#fdf6ee"]], "sea": [[0, "#f3f6f7"], [60, "#e3ebef"], [130, "#cfdbe4"], [300, "#b0c3d4"], [800, "#869fbd"], [1600, "#62799f"], [2700, "#465781"], [4500, "#33416a"]], "shade": {"land": 1.5, "sea": 1.5, "tint": ["#4f4d85", "#fff4c8", 0.6]}},
+};
 export const ZK = ["temperate", "boreal", "tundra", "arid"];
 
 export const rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
